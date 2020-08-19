@@ -28,7 +28,6 @@ module.exports.signup_get = (req, res) => {
 };
 
 module.exports.login_get = (req, res) => {
-  console.log(req.body);
   res.render("login");
 };
 
