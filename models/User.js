@@ -49,12 +49,28 @@ userSchema.pre('save', async function(next){
     // which is a string that is added to the hashed password.
     // We hash the password using the hash function. The salt string
     // is added as an extra security layer, so the hackers
-    // can not reverse engineer the crypting progress.
+    // can not reverse engineer the crypting process.
 
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
     next();
 });
+
+// Static method for logging in users:
+
+userSchema.statics.login = async function(email, password){
+    const user = await this.findOne({email});
+
+    if(user){
+        const auth = await bcrypt.compare(password, user.password);
+        if(auth){
+            return user;
+        }
+        throw Error('The password is incorrect!');
+    }
+
+    throw Error('The user email does not exist!');
+}
 
 const User = mongoose.model('user', userSchema);
 
