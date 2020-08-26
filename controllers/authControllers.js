@@ -102,7 +102,9 @@ module.exports.login_post = async (req, res) => {
 
 module.exports.logout_get = (req, res) => {
   // We logout the user by overwriting
-  // the existing jwt token:
+  // the existing jwt token with an 
+  // empty token that stays in the browser
+  // for only a fragment of a second:
 
   res.cookie('jwt', '', {maxAge: 1});
   res.redirect('/');
