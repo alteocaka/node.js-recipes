@@ -1,16 +1,21 @@
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
   <nav>
     <h1><a href="/"><span class="red">My</span><span class="mustard">Recipes</span></a></h1>
     <ul>
-      <li><a href="/login" class="btn">Login</a></li>
+      <% if (user) { %>
+      <li>Welcome, <span class="mustard" style="font-weight: 600;"><%= user.email %></span> </li>
       <li><a href="/logout" class="btn-logout">Logout</a></li>
+      <% } else { %>
+      <li><a href="/login" class="btn">Login</a></li>
+      <% } %>
     </ul>
   </nav>
-  
